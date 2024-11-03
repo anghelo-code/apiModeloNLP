@@ -8,6 +8,7 @@ fastapi = "*"
 uvicorn = "*"
 joblib = "*"
 spacy = "*"
+pandas = "*"
 
 [dev-packages]
 
