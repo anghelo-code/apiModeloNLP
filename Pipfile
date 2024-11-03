@@ -10,6 +10,7 @@ joblib = "*"
 spacy = "*"
 pandas = "*"
 numpy = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
