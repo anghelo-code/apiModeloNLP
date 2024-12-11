@@ -11,6 +11,7 @@ spacy = "*"
 pandas = "*"
 numpy = "*"
 scikit-learn = "*"
+tensorflow = "*"
 
 [dev-packages]
 
