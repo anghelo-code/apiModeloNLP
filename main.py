@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from nplProcess import procesar1
 from fastapi.middleware.cors import CORSMiddleware
-import joblib
+from keras.models import load_model
 
 # Cargar el modelo guardado
-modelo = joblib.load("SVM_Kernel_RBF.pkl")
+modelo = load_model('modelo_LSTM_fasttext.keras')
 
 app = FastAPI()
 
@@ -29,9 +29,15 @@ async def clasificar_texto(data: InputData):
   texto_recibido = data.texto
 
   texto_recibido = procesar1(texto_recibido, 3)
-  
+
   # Realizar la predicción usando el modelo
-  resultado = modelo.predict(texto_recibido.toarray())  # Asegúrate de que la entrada sea en el formato correcto
+  # print(texto_recibido)
+  resultado = modelo.predict(texto_recibido)[0].tolist()  # Asegúrate de que la entrada sea en el formato correcto
+  # resultado = "  ddd"
+  print(resultado)
 
   # Devolver el resultado en formato JSON
-  return {"resultado": resultado.tolist()}  # Convertir a lista si es necesario
+  return {
+    "resultado_0": resultado[0],
+    "resultado_1": resultado[1]
+  }  # Convertir a lista si es necesario
